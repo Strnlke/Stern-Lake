@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Updates - Stern Lake</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #1a1a1a;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 2rem 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(231, 76, 60, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #e74c3c;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            background-color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .filter-tabs button {
+            background-color: transparent;
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            padding: 0.8rem 2rem;
+            margin: 0 0.5rem 0.5rem 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .filter-tabs button:hover,
+        .filter-tabs button.active {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+            color: white;
+        }
+
+        /* Main Content */
+        .updates-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .post {
+            background-color: white;
+            margin-bottom: 3rem;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            padding: 2rem;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .post-category {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.85rem;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .post-title {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .post-meta {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .post-content {
+            padding: 2rem;
+        }
+
+        .post-excerpt {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #c0392b;
+        }
+
+        .read-more::after {
+            content: ' →';
+        }
+
+        .post-full-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .post-full-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Hidden class for filtering */
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: #cccccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .post-title {
+                font-size: 1.5rem;
+            }
+
+            .filter-tabs button {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="updates.html">UPDATES</a></li>
+            <li><a href="characters.html">CHARACTERS</a></li>
+            <li><a href="world.html">THE WORLD</a></li>
+            <li><a href="journey.html">MY JOURNEY</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ALL UPDATES</h1>
+            <p class="subtitle">Every post from the journey of creating Stern Lake</p>
+        </div>
+    </section>
+
+    <div class="filter-tabs">
+        <button class="filter-btn active" data-category="all">ALL POSTS</button>
+        <button class="filter-btn" data-category="The Town of Stern Lake">THE TOWN</button>
+        <button class="filter-btn" data-category="Throwback Thursday">CHARACTERS</button>
+        <button class="filter-btn" data-category="Writing Journey">WRITING JOURNEY</button>
+    </div>
+
+    <div class="updates-container" id="posts-container">
+        <!-- Blog Post 1 -->
+        <article class="post" data-category="Writing Journey">
+            <div class="post-header">
+                <span class="post-category">Writing Journey</span>
+                <h2 class="post-title">A Long Path to Stern Lake</h2>
+                <div class="post-meta">February 1, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    I have always loved creating stories, ever since I was a kid writing on a donated Windows 3.1 computer. I don't remember most of the stories themselves. I lost them years ago. I just remember writing about friends going on adventures, and how natural it felt to sit there and make something up. When I got older, I shifted into screenplays. I noticed I started writing about my own life, just dressed up differently. Most of the time, it felt more like a journal entry than anything else. I didn't stop telling stories when I became an adult. I just never completed them. Stern Lake is the first time I noticed a difference.
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 2 -->
+        <article class="post" data-category="Throwback Thursday">
+            <div class="post-header">
+                <span class="post-category">Throwback Thursday</span>
+                <h2 class="post-title">Throwback Thursday #4 – Amanda</h2>
+                <div class="post-meta">January 30, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Before Stern Lake, Amanda's world was smaller and clearer. Her father was the center of it. He was the person she trusted without hesitation. The one she measured herself against. For a long time, he represented stability — the idea that someone could be dependable, present, and worth believing in. When that trust broke, it didn't shatter loudly. It rewrote things quietly. Amanda learned that closeness could turn on you...
+                </p>
+                <div class="post-full-content" style="display: none;">
+                    <p>Before Stern Lake, Amanda's world was smaller and clearer. Her father was the center of it.</p>
+                    <p>He was the person she trusted without hesitation. The one she measured herself against. For a long time, he represented stability — the idea that someone could be dependable, present, and worth believing in.</p>
+                    <p>When that trust broke, it didn't shatter loudly. It rewrote things quietly.</p>
+                    <p>Amanda learned that closeness could turn on you. That the people you love most are capable of doing the most damage without meaning to. She didn't lose her father all at once — she lost the version of him she thought was permanent.</p>
+                    <p>After that, Amanda became careful. She held onto anger because it felt safer than forgiveness. She learned how to leave first, how to stay guarded, how to keep control over who got close and who didn't.</p>
+                    <p>Then Nathan happened.</p>
+                    <p>He wasn't part of the plan she built for herself. He didn't fit the rules she'd learned to live by. Somehow, he stayed. Somehow, she let him. Not because she stopped being afraid — but because, for once, the fear didn't win.</p>
+                    <p>What she carried forward wasn't hatred — it was vigilance.</p>
+                    <p>Amanda didn't stop wanting connection. She just stopped trusting that it could last.</p>
+                    <p><strong>This is Amanda before Stern Lake.<br>Not broken — just braced.</strong></p>
+                </div>
+                <a href="#" class="read-more" onclick="togglePost(this); return false;">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 3 -->
+        <article class="post" data-category="The Town of Stern Lake">
+            <div class="post-header">
+                <span class="post-category">The Town of Stern Lake</span>
+                <h2 class="post-title">A Town That Isn't Empty</h2>
+                <div class="post-meta">January 28, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Stern Lake isn't empty, but it isn't full either. The houses have trimmed lawns and tinted windows, and many driveways sit unused. The town looks maintained, even when it feels quiet. When Stern Lake first opened in 2013, people arrived quickly. Within a year, there were few places left to live. Many residents worked for the same company that owned their homes, and the town moved at a steady, communal pace. That rhythm didn't last. Now, the spaces meant for neighbors have been replaced with spaces meant for visitors. Toy stores, learning centers, and a school designed more for demonstration than community line the streets. They keep the town active, even when fewer people stay. Stern Lake didn't empty out. It reorganized. What was once built for residents now exists for an audience.
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 4 -->
+        <article class="post" data-category="Writing Journey">
+            <div class="post-header">
+                <span class="post-category">Writing Journey</span>
+                <h2 class="post-title">The Journey of Becoming an Author</h2>
+                <div class="post-meta">January 25, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Hi Stern Lake Community, This week I wanted to talk about my own reflections on what it would mean for me to pursue writing as a career. I've always found myself going into deep elaborate daydreams about my future about the different avenues I have wanted to take my whole life. There is a thrill in coming up with scenarios of a better more fulfilling life. With this particular dream however there is fear. Since I have decided to really commit myself to this path it feels real and with that comes the fear of the unknown aspects. What will it look like to find a publisher, and how my life might transform if I succeed. The fear of testing myself, to go into parts of this journey that make me vulnerable can be overwhelming, but it's also what makes this whole thing meaningful...
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 5 -->
+        <article class="post" data-category="Throwback Thursday">
+            <div class="post-header">
+                <span class="post-category">Throwback Thursday</span>
+                <h2 class="post-title">Throwback Thursday #3 – Mary (Emily's Grandmother)</h2>
+                <div class="post-meta">January 23, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Before Stern Lake became a place of spectacle and silence, there was Mary. To Emily, her Grandma wasn't just the person who raised her after everything came apart. She was steadiness, Discipline. Faith lived quietly, not loudly. Mary was a woman shaped by belief long before belief became complicated in Stern Lake. She taught scripture, guided others, and carried her faith with a firmness that didn't waver—even when life was rough. She had survived loss early, raised a family alone. She built a church from the ground up because she believed a town needed more than just houses to be whole. When scandal shattered that church under different leadership and Emily's family with it, Mary became Emily's anchor. Even after Mary was gone, those lessons stayed in Emily's heart...
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 6 -->
+        <article class="post" data-category="The Town of Stern Lake">
+            <div class="post-header">
+                <span class="post-category">The Town of Stern Lake</span>
+                <h2 class="post-title">The Unspoken Remnant of Stern Lake</h2>
+                <div class="post-meta">January 21, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    On the east side of town, a freshly washed concrete slab, marks where the town's church once stood—a building lost when grief turned to anger. The congregation, once a community built of trust, became victims in the aftermath—crushed between tragedy and scandal. When two teenage kid's deaths led to the church destruction, a scar was left on both the land and the people. Now the slab stands as a canvas for many who felt abandoned to keep the memory alive as a silent but loud reminder. In Stern lake, even what's lost still shapes what remains. But what else does this foundation reveal about the past? Stay tuned as we uncover more of Stern Lake's hidden layers.
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 7 -->
+        <article class="post" data-category="Writing Journey">
+            <div class="post-header">
+                <span class="post-category">Writing Journey</span>
+                <h2 class="post-title">Lessons from the Writing Journey</h2>
+                <div class="post-meta">January 18, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Hello, Stern Lake Community! This week, I want to take you behind the scenes of my writing journey and share some of the most valuable lessons I've learned along the way. When I started writing Stern Lake, I knew I had a story that I liked, but I didn't realize just how much work it needed. I realized how a good story needs a good foundational structure. I began to study story structure and one of the biggest lessons has been understanding the three-act structure—how the beginning, middle, and end of a story each play a crucial role in building tension and guiding the reader through the journey. I've also spent a lot of time diving into character arcs and backgrounds. Creating characters like John and Emily has taught me how a character's past can shape their actions and how their internal beliefs can drive them even when they didn't realize it...
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 8 -->
+        <article class="post" data-category="Throwback Thursday">
+            <div class="post-header">
+                <span class="post-category">Throwback Thursday</span>
+                <h2 class="post-title">Throwback Thursday #2 – John (Through Emily's Eyes)</h2>
+                <div class="post-meta">January 16, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Before the mission, John wasn't just an astronaut—he was someone who had overcome doubt from an early age. Growing up, he was told by those closest to him that he'd never achieved his dream of becoming an astronaut. But John never let go of that dream. To Emily, John was the embodiment of perseverance. He believed that discovering life beyond Earth could bring hope to humanity—a truth he held onto, even when others doubted him. When he joined Stargazers United, it felt like a natural step for him, a chance to prove that his lifelong belief in the value of exploration was well-founded. But as John's commitment to the mission grew, Emily began to see the quiet distance that formed between them...
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 9 -->
+        <article class="post" data-category="The Town of Stern Lake">
+            <div class="post-header">
+                <span class="post-category">The Town of Stern Lake</span>
+                <h2 class="post-title">The Unseen Side of Stern Lake</h2>
+                <div class="post-meta">January 14, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Stern Lake isn't a typical town. While it may look like a community, it's actually more like private property, fully owned and controlled by Stargazers United. It has residents, of course, but many houses remain empty, giving parts of the town a stage-like quality. The real turning point came when Stargazers United introduced educational programs and tours to gain the trust of the people after some turned away. That's when Stern Lake shifted into more of a showcase—a "billboard town" for space exploration and the central hub of Stargazers United's public image. It became a place created to be seen, where the focus was on presenting an idealized version of Stargazers United. But when the focus shifts away from genuine teaching and more toward showcasing a company's image, the essence of community starts to fade...
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 10 -->
+        <article class="post" data-category="Throwback Thursday">
+            <div class="post-header">
+                <span class="post-category">Throwback Thursday</span>
+                <h2 class="post-title">Throwback Thursday #1 – Emily</h2>
+                <div class="post-meta">January 23, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Before the stars and the clutter of modern-day Stern Lake, Emily's life in this billboard of a town was marked by trials and resilience. As a child, her parents, who ran the town's only church deceived their followers which led to tragedy and scandal. After the loss of her parents and her grandmother, Emily was left to go through life alone. It was only a few years later she met John, a beacon of hope in her turbulent world. Their story began with dreams of a future together, but as John's commitment to Stargazers United grew, Emily faced that fear of solitude again. Join us as we explore Emily's journey before the mission, a story of love, loss, and strength.
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 11 -->
+        <article class="post" data-category="Writing Journey">
+            <div class="post-header">
+                <span class="post-category">Writing Journey</span>
+                <h2 class="post-title">Behind the Scenes: My Writing Journey</h2>
+                <div class="post-meta">January 21, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    Hello, Stern Lake Community! I wanted to take a moment and talk a bit about my story as a writer. Over the years, I've started and stopped so many different stories. It's been frustrating honestly, and it got to the point where I had to stay committed. My dream to be an author and that will never happen if I don't FINISH a story. So that brings us here, Stern Lake that book I have stayed with since 2021 and I am more motivated than ever to finish this one, I really love this story and I hope you all do too! I am so grateful to have you all along for the ride! Thank you for your support as I navigate the ups and downs of this creative journey!
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+
+        <!-- Blog Post 12 -->
+        <article class="post" data-category="The Town of Stern Lake">
+            <div class="post-header">
+                <span class="post-category">The Town of Stern Lake</span>
+                <h2 class="post-title">The Setting of Stern Lake</h2>
+                <div class="post-meta">January 28, 2026</div>
+            </div>
+            <div class="post-content">
+                <p class="post-excerpt">
+                    In the heart of Ohio lies Stern Lake, a quaint small town with a unique charm. More than just a peaceful getaway, Stern Lake is owned and operated by Stargazers United, welcoming visitors from around the world to learn about space exploration and the mysteries it holds. As we journey deeper into Stern Lake, we'll uncover the secrets hidden within this town, where science and mystery intertwine.
+                </p>
+                <a href="#" class="read-more">READ MORE</a>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stern Lake. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const posts = document.querySelectorAll('.post');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+
+                posts.forEach(post => {
+                    if (category === 'all' || post.getAttribute('data-category') === category) {
+                        post.classList.remove('hidden');
+                    } else {
+                        post.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Toggle full post content
+        function togglePost(button) {
+            const postContent = button.parentElement;
+            const excerpt = postContent.querySelector('.post-excerpt');
+            const fullContent = postContent.querySelector('.post-full-content');
+            
+            if (fullContent.style.display === 'none') {
+                // Show full content
+                excerpt.style.display = 'none';
+                fullContent.style.display = 'block';
+                button.innerHTML = 'READ LESS ↑';
+            } else {
+                // Show excerpt only
+                excerpt.style.display = 'block';
+                fullContent.style.display = 'none';
+                button.innerHTML = 'READ MORE →';
+            }
+        }
+    </script>
+<!-- Stern Lake Read More Helper -->
+<script>
+  (function () {
+    function togglePost(button) {
+      const postContent = button.closest('.post-content');
+      if (!postContent) return;
+
+      const excerpt = postContent.querySelector('.post-excerpt');
+      const fullContent = postContent.querySelector('.post-full-content');
+
+      // If there's nothing to expand, remove the button.
+      if (!fullContent) {
+        button.remove();
+        return;
+      }
+
+      const isHidden = fullContent.style.display === '' || fullContent.style.display === 'none';
+
+      if (isHidden) {
+        if (excerpt) excerpt.style.display = 'none';
+        fullContent.style.display = 'block';
+        button.textContent = 'READ LESS ↑';
+      } else {
+        if (excerpt) excerpt.style.display = 'block';
+        fullContent.style.display = 'none';
+        button.textContent = 'READ MORE →';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.post').forEach(post => {
+        const btn = post.querySelector('.read-more');
+        if (!btn) return;
+
+        // Prevent double-binding if other scripts already attached.
+        if (btn.dataset && btn.dataset.rmBound === '1') return;
+        if (btn.dataset) btn.dataset.rmBound = '1';
+
+        const postContent = btn.closest('.post-content');
+        const fullContent = postContent ? postContent.querySelector('.post-full-content') : null;
+
+        // Remove READ MORE if there is no hidden content
+        if (!fullContent) {
+          btn.remove();
+          return;
+        }
+
+        // Ensure full content starts hidden
+        fullContent.style.display = 'none';
+
+        // Wire up click safely (works for <a> and <button>)
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          togglePost(btn);
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

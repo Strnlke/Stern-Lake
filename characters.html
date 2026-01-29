@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters - Stern Lake</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #1a1a1a;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 2rem 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(231, 76, 60, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #e74c3c;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        /* Main Content */
+        .characters-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .character-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .character-header {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            padding: 2rem;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .character-name {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .character-subtitle {
+            color: #aaaaaa;
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            font-style: italic;
+        }
+
+        .character-content {
+            padding: 2rem;
+        }
+
+        .character-excerpt {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .post-link {
+            display: inline-block;
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .post-link:hover {
+            color: #c0392b;
+        }
+
+        .post-link::after {
+            content: ' →';
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: #cccccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="stern-lake-blog.html">HOME</a></li>
+            <li><a href="#updates">UPDATES</a></li>
+            <li><a href="characters.html">CHARACTERS</a></li>
+            <li><a href="#world">THE WORLD</a></li>
+            <li><a href="#journey">MY JOURNEY</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>THE CHARACTERS</h1>
+            <p class="subtitle">Meet the people of Stern Lake through Throwback Thursday</p>
+        </div>
+    </section>
+
+    <div class="characters-container">
+        <p class="intro-text">
+            Every Thursday, I explore the backstories of the people who inhabit Stern Lake. These are their journeys, their struggles, and the moments that shaped who they became before the story begins.
+        </p>
+
+        <div class="character-grid">
+            <!-- Character Card: Amanda -->
+            <div class="character-card">
+                <div class="character-header">
+                    <h2 class="character-name">Amanda</h2>
+                    <p class="character-subtitle">Not broken — just braced</p>
+                </div>
+                <div class="character-content">
+                    <p class="character-excerpt">
+                        Before Stern Lake, Amanda's world was smaller and clearer. Her father was the center of it. When that trust broke, it didn't shatter loudly. It rewrote things quietly. Amanda learned that closeness could turn on you. She became careful, held onto anger because it felt safer than forgiveness. Then Nathan happened.
+                    </p>
+                    <a href="stern-lake-blog.html#amanda" class="post-link">READ AMANDA'S STORY</a>
+                    <p class="post-date">Posted January 30, 2026</p>
+                </div>
+            </div>
+
+            <!-- Character Card: Mary -->
+            <div class="character-card">
+                <div class="character-header">
+                    <h2 class="character-name">Mary</h2>
+                    <p class="character-subtitle">Emily's Grandmother</p>
+                </div>
+                <div class="character-content">
+                    <p class="character-excerpt">
+                        Before Stern Lake became a place of spectacle and silence, there was Mary. To Emily, her Grandma wasn't just the person who raised her after everything came apart. She was steadiness, discipline. Faith lived quietly, not loudly. Mary was a woman shaped by belief long before belief became complicated in Stern Lake.
+                    </p>
+                    <a href="stern-lake-blog.html#mary" class="post-link">READ MARY'S STORY</a>
+                    <p class="post-date">Posted January 23, 2026</p>
+                </div>
+            </div>
+
+            <!-- Character Card: John -->
+            <div class="character-card">
+                <div class="character-header">
+                    <h2 class="character-name">John</h2>
+                    <p class="character-subtitle">Through Emily's Eyes</p>
+                </div>
+                <div class="character-content">
+                    <p class="character-excerpt">
+                        Before the mission, John wasn't just an astronaut—he was someone who had overcome doubt from an early age. To Emily, John was the embodiment of perseverance. He believed that discovering life beyond Earth could bring hope to humanity. But as John's commitment to the mission grew, Emily began to see the quiet distance that formed between them.
+                    </p>
+                    <a href="stern-lake-blog.html#john" class="post-link">READ JOHN'S STORY</a>
+                    <p class="post-date">Posted January 16, 2026</p>
+                </div>
+            </div>
+
+            <!-- Character Card: Emily -->
+            <div class="character-card">
+                <div class="character-header">
+                    <h2 class="character-name">Emily</h2>
+                    <p class="character-subtitle">A story of love, loss, and strength</p>
+                </div>
+                <div class="character-content">
+                    <p class="character-excerpt">
+                        Before the stars and the clutter of modern-day Stern Lake, Emily's life was marked by trials and resilience. As a child, her parents, who ran the town's only church, deceived their followers which led to tragedy and scandal. After the loss of her parents and her grandmother, Emily was left to go through life alone.
+                    </p>
+                    <a href="stern-lake-blog.html#emily" class="post-link">READ EMILY'S STORY</a>
+                    <p class="post-date">Posted January 23, 2026</p>
+                </div>
+            </div>
+
+            <!-- ADD NEW CHARACTER CARDS HERE -->
+            <!-- 
+            To add a new character, copy this template and fill in the details:
+            
+            <div class="character-card">
+                <div class="character-header">
+                    <h2 class="character-name">CHARACTER NAME</h2>
+                    <p class="character-subtitle">Short tagline or description</p>
+                </div>
+                <div class="character-content">
+                    <p class="character-excerpt">
+                        Brief excerpt from their Throwback Thursday post...
+                    </p>
+                    <a href="stern-lake-blog.html#charactername" class="post-link">READ [NAME]'S STORY</a>
+                    <p class="post-date">Posted [DATE]</p>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stern Lake. All rights reserved.</p>
+    </footer>
+<!-- Stern Lake Read More Helper -->
+<script>
+  (function () {
+    function togglePost(button) {
+      const postContent = button.closest('.post-content');
+      if (!postContent) return;
+
+      const excerpt = postContent.querySelector('.post-excerpt');
+      const fullContent = postContent.querySelector('.post-full-content');
+
+      // If there's nothing to expand, remove the button.
+      if (!fullContent) {
+        button.remove();
+        return;
+      }
+
+      const isHidden = fullContent.style.display === '' || fullContent.style.display === 'none';
+
+      if (isHidden) {
+        if (excerpt) excerpt.style.display = 'none';
+        fullContent.style.display = 'block';
+        button.textContent = 'READ LESS ↑';
+      } else {
+        if (excerpt) excerpt.style.display = 'block';
+        fullContent.style.display = 'none';
+        button.textContent = 'READ MORE →';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.post').forEach(post => {
+        const btn = post.querySelector('.read-more');
+        if (!btn) return;
+
+        // Prevent double-binding if other scripts already attached.
+        if (btn.dataset && btn.dataset.rmBound === '1') return;
+        if (btn.dataset) btn.dataset.rmBound = '1';
+
+        const postContent = btn.closest('.post-content');
+        const fullContent = postContent ? postContent.querySelector('.post-full-content') : null;
+
+        // Remove READ MORE if there is no hidden content
+        if (!fullContent) {
+          btn.remove();
+          return;
+        }
+
+        // Ensure full content starts hidden
+        fullContent.style.display = 'none';
+
+        // Wire up click safely (works for <a> and <button>)
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          togglePost(btn);
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
